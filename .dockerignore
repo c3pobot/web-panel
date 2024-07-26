@@ -1,0 +1,14 @@
+.git
+.gitignore
+.dockerignore
+.env
+.env.production
+.testregistry
+buildprodimage.sh
+buildtestimage.sh
+updategitdependency.sh
+Dockerfile
+Dockerfile.dev
+node_modules
+data
+cache
