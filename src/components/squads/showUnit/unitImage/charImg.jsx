@@ -29,7 +29,7 @@ export default function CharImg ({ unit = {}, uInfo }){
         <Box className="character-portrait">
           <Box className="character-portrait__primary character-portrait__primary--size-normal">
             <Box className="character-portrait__image-frame character-portrait__image-frame--size-normal">
-              <img className="character-portrait__img character-portrait__img--size-normal" src={'https://game-assets.swgoh.gg/'+uInfo?.thumbnailName+'.png'} alt="" />
+              <img className="character-portrait__img character-portrait__img--size-normal" src={import.meta.env.VITE_WEBPANEL_IMAGE_HOST+'/'+uInfo?.thumbnailName+'.png'} alt="" />
             </Box>
             <Box className={levelClass}>{level}</Box>
             <Box className={gearClassR}/>

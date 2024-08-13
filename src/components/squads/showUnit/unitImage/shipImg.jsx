@@ -12,7 +12,7 @@ export default function ShipImg({unit = {}, uInfo = {}}){
             <Box className="ship-portrait ship-portrait--size-">
               <Box className="ship-portrait__image-group">
                 <Box className="ship-portrait__image-frame">
-                  <img className="ship-portrait__img ship-portrait__img--size-" src={'https://game-assets.swgoh.gg/'+uInfo?.thumbnailName+'.png'} alt="" />
+                  <img className="ship-portrait__img ship-portrait__img--size-" src={import.meta.env.VITE_WEBPANEL_IMAGE_HOST+'/'+uInfo?.thumbnailName+'.png'} alt="" />
                 </Box>
                 <Box className="ship-portrait__level ship-portrait__level--size-">{unit.level || 85}</Box>
                 <Box className="ship-portrait__frame"/>

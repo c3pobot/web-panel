@@ -22,10 +22,8 @@ export default function useWebProfile () {
   }
   useEffect(() => {
     // storing input name
-    if(value !== {}){
-      localStorage.setItem('webProfile', JSON.stringify(value))
-      saveData(value)
-    }
+    localStorage.setItem('webProfile', JSON.stringify(value))
+    saveData(value)
   }, [value]);
 
   return [value, saveValue];

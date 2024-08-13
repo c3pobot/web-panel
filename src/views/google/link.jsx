@@ -15,8 +15,8 @@ function getAuthUrl () {
   url.searchParams.append('prompt', 'consent')
   url.searchParams.append('scope', 'https://www.googleapis.com/auth/games_lite https://www.googleapis.com/auth/userinfo.profile')
   url.searchParams.append('response_type', 'code')
-  url.searchParams.append('client_id', import.meta.env.VITE__GOOG_CLIENT_ID)
-  url.searchParams.append('redirect_uri', import.meta.env.VITE__GOOG_REDIRECT_URI)
+  url.searchParams.append('client_id', import.meta.env.VITE_GOOG_CLIENT_ID)
+  url.searchParams.append('redirect_uri', import.meta.env.VITE_GOOG_REDIRECT_URI)
   return url.href
 }
 
