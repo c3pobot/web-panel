@@ -108,6 +108,37 @@ export default function ShowPlatoons({ opts = {}, platoonMap = [], tbId, pDef = 
     }
     setSpinner(false)
   }
+  async function prefillSquad(prefill = true, data = {}, units = []){
+    if(units?.length === 0) return
+    setSpinner(true)
+    let tempPlatoonIds = JSON.parse(JSON.stringify(platoonIds))
+    let pIndex = tempPlatoonIds?.findIndex(x=>x.id === data.platoonId)
+    if(pIndex >= 0){
+      let tempObj = {}
+      if(!tempPlatoonIds[pIndex].squads) tempPlatoonIds[pIndex].squads = []
+      let squad = { num: data.squadNum, unitConfig: [] }
+      let sIndex = tempPlatoonIds[pIndex]?.squads?.findIndex(x=>x.num === data.squadNum)
+      if(sIndex >= 0) squad = tempPlatoonIds[pIndex].squads[sIndex]
+      if(prefill){
+        for(let i in units){
+          if(!tempObj[units[i].baseId]) tempObj[units[i].baseId] = { baseId: units[i].baseId, prefilled: 0, players: [] }
+          tempObj[units[i].baseId].prefilled++
+        }
+        squad.unitConfig = Object.values(tempObj)
+
+      }else{
+        squad.unitConfig = []
+      }
+      if(sIndex >= 0){
+        tempPlatoonIds[pIndex].squads[sIndex] = squad
+      }else{
+        tempPlatoonIds[pIndex].squads.push(squad)
+      }
+      await updatePlatoonDb('tbPlatoonIds-'+tbDay+'-'+tbId, tempPlatoonIds)
+      setPlatoonIds(tempPlatoonIds)
+    }
+    setSpinner(false)
+  }
   async function changeUnit(prefilled = false, data = {}){
     setSpinner(true)
     setUnitEditOpen(false)
@@ -230,13 +261,18 @@ export default function ShowPlatoons({ opts = {}, platoonMap = [], tbId, pDef = 
       if(!squad?.unitConfig) squad.unitConfig = []
       let uIndex = squad?.unitConfig?.findIndex(x=>x.baseId === data.baseId)
       if(uIndex >= 0) unit = squad.unitConfig[uIndex]
-      if(method === 'add') unit.players.push(playerId)
+      if(method === 'add'){
+        unit.players.push(playerId)
+        unit.prefilled--
+        if(unit.prefilled < 0) unit.prefilled = 0
+      }
       if(method === 'remove') unit.players = unit.players.filter(x=>x !== playerId)
       if(uIndex >= 0){
         squad.unitConfig[uIndex] = unit
       }else{
         squad.unitConfig.push(unit)
       }
+
       if(sIndex >= 0){
         tempPlatoonIds[pIndex].squads[sIndex] = squad
       }else{
@@ -258,7 +294,7 @@ export default function ShowPlatoons({ opts = {}, platoonMap = [], tbId, pDef = 
     {openPlatoonEdit && <EditPlatoon open={openPlatoonEdit} setOpen={setPlatoonEditOpen} platoon={editPlatoon} pDef={pDef} changePlatoon={changePlatoon} removeBonusPlatoon={removeBonusPlatoon}/>}
     {openUnitEdit && <EditUnit open={openUnitEdit} setOpen={setUnitEditOpen} data={editUnit} changeUnit={changeUnit} assignUnit={assignUnit} member={member}/>}
     {openUnitAssign && <AssignUnit open={openUnitAssign} setOpen={setUnitAssignOpen} data={editUnit} changeUnitAssign={changeUnitAssign} member={member} />}
-    {platoonMap.map((platoon, index)=>(<ShowPlatoon key={index} platoon={platoon} updatePlatoon={updatePlatoon} updateSquad={updateSquad} updateUnit={updateUnit} removeAssigned={removeAssigned}/>))}
+    {platoonMap.map((platoon, index)=>(<ShowPlatoon key={index} platoon={platoon} prefillSquad={prefillSquad} updatePlatoon={updatePlatoon} updateSquad={updateSquad} updateUnit={updateUnit} removeAssigned={removeAssigned}/>))}
     </TableBody>
     </Table>
   )

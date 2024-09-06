@@ -7,7 +7,7 @@ const conflictSx = {
   color: 'black'
 }
 
-export default function ShowPlatoon({ platoon = {}, updatePlatoon, updateSquad, updateUnit, removeAssigned }){
+export default function ShowPlatoon({ platoon = {}, prefillSquad, updatePlatoon, updateSquad, updateUnit, removeAssigned }){
   const [ show, setShow ] = useState(platoon.points === platoon.totalPoints ? false:true)
 
   function showSquads(){
@@ -22,7 +22,7 @@ export default function ShowPlatoon({ platoon = {}, updatePlatoon, updateSquad, 
     <TableCell sx={conflictSx}></TableCell>
     <TableCell sx={conflictSx}>{!platoon.exclude && !platoon.prefilled && <Button variant="contained" onClick={showSquads}>{show ? 'Hide':'Show'} Squads</Button>}</TableCell>
     </TableRow>
-    {show && platoon.squads.map((squad, index)=>(<ShowSquad key={index} platoon={platoon} squad={squad} updateSquad={updateSquad} updateUnit={updateUnit} removeAssigned={removeAssigned}/>))}
+    {show && platoon.squads.map((squad, index)=>(<ShowSquad key={index} prefillSquad={prefillSquad} platoon={platoon} squad={squad} updateSquad={updateSquad} updateUnit={updateUnit} removeAssigned={removeAssigned}/>))}
     </Fragment>
   )
 }

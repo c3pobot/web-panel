@@ -6,7 +6,7 @@ const squadSx = {
   bgcolor: 'gray'
 }
 
-export default function ShowSquad({ platoon = {}, squad = {}, updateSquad, updateUnit, removeAssigned }){
+export default function ShowSquad({ platoon = {}, squad = {}, prefillSquad, updateSquad, updateUnit, removeAssigned }){
   const [ show, setShow ] = useState(squad.points > 0 ? false:true)
   const [ openAssigned, setOpenAssigned ] = useState(false)
   function handleRemoveAssigned(cmd, unit){
@@ -19,6 +19,8 @@ export default function ShowSquad({ platoon = {}, squad = {}, updateSquad, updat
   }
   let assignedUnits = squad?.units?.filter(x=>x.assigned) || []
 
+  let prefilledUnits = squad?.units.filter(x=>x.player === 'Prefilled').length || 0
+  
   return(
     <Fragment>
       {openAssigned && <ShowAssigned open={openAssigned} setOpen={setOpenAssigned} assignedUnits={assignedUnits} handleClick={handleRemoveAssigned} platoon={platoon} squad={squad}/>}
@@ -27,7 +29,11 @@ export default function ShowSquad({ platoon = {}, squad = {}, updateSquad, updat
           <Typography>{platoon.type+' '+platoon.nameKey+' Squad '+squad.num+(platoon?.rarity ? ' '+platoon.rarity+'*':'')+(platoon?.relicTier > 3 ? ' R'+(platoon.relicTier - 2):'')+' ('+squad.points?.toLocaleString()+') '+(squad.exclude ? ' Excluded':(squad.prefilled ? ' Prefilled':''))}</Typography>
         </TableCell>
         <TableCell sx={squadSx}>{assignedUnits?.length > 0 && <Button variant="contained" onClick={()=>setOpenAssigned(true)}>Show Assigned</Button>}</TableCell>
-        <TableCell sx={squadSx}>{!squad.exclude && !squad.prefilled && <Button variant="contained" onClick={showUnits}>{show ? 'Hide':'Show'} Units</Button>}</TableCell>
+        <TableCell sx={squadSx}>
+          {!squad.exclude && !squad.prefilled && <Button variant="contained" onClick={showUnits}>{show ? 'Hide':'Show'} Units</Button>}
+           {prefilledUnits < squad.units?.length && <Button variant="contained" onClick={()=>prefillSquad(true, { platoonId: platoon.id, squadNum: squad.num }, squad.units)}>Prefill All</Button>}
+           {prefilledUnits === squad.units?.length && <Button variant="contained" onClick={()=>prefillSquad(false, { platoonId: platoon.id, squadNum: squad.num }, squad.units)}>Clear Prefill</Button>}
+          </TableCell>
       </TableRow>
       {show && squad?.units?.length > 0 && <ShowUnits platoon={platoon} squad={squad} units={squad.units || []} updateUnit={updateUnit}/>}
     </Fragment>
