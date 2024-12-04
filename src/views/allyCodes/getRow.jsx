@@ -7,6 +7,11 @@ import { TableBody, TableCell, TableRow} from '@mui/material';
 import ConfirmAction from 'components/confirmAction'
 import ShowMenu from 'components/showMenu'
 
+const authTypes = {
+  google: 'Google',
+  codeAuth: 'EA Connect',
+  eaconnect: 'EA Connect'
+}
 export default function GetAllyRow ({ name, allyCode, type, handleEdit, pri, alt, buttonNav}){
   const [ userACStatus, setACMenuStatus ] = useState(false);
   const [ dialogMsg, setDialogMsg ] = useState({open:false});
@@ -47,10 +52,6 @@ export default function GetAllyRow ({ name, allyCode, type, handleEdit, pri, alt
       value: {path: '/google', allyCode: allyCode, playerName: name}
 
     })
-    opt.array.push({
-      name: 'Link EA Connect Auth',
-      value: {path: '/codeAuth', allyCode: allyCode, playerName: name}
-    })
     return (
       <ShowMenu opt={opt}/>
     )
@@ -62,7 +63,7 @@ export default function GetAllyRow ({ name, allyCode, type, handleEdit, pri, alt
       <TableRow onClick={()=>setACMenuStatus(true)}>
         <TableCell ><Typography>{name}</Typography></TableCell>
         <TableCell><Typography>{allyCode}</Typography></TableCell>
-        <TableCell><Typography>{type ? (type === 'google' ? 'Google':(type === 'codeAuth' ? 'EA Connect':'Guest')):'None'}</Typography></TableCell>
+        <TableCell><Typography>{type ? (authTypes[type] ? authTypes[type]:'Guest'):'None'}</Typography></TableCell>
         <TableCell><Typography>{pri === allyCode ? 'Primary':alt === allyCode ? 'Alt':''}</Typography></TableCell>
       </TableRow>
     </TableBody>
