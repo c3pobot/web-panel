@@ -1,0 +1,102 @@
+.unit-icon {
+  background-color: transparent;
+  width: 50%;
+  position: relative;
+  display: block;
+  bottom: 36px;
+  left: 42px;
+}
+.character-portrait__img {
+    margin-left: -2px;
+    margin-top: -2px
+}
+.character-portrait__img--size-micro {
+    width: 30px;
+    height: 30px
+}
+
+.character-portrait__img--size-xsmall {
+    width: 40px;
+    height: 40px
+}
+
+.character-portrait__img--size-small {
+    width: 50px;
+    height: 50px
+}
+
+.character-portrait__img--size-medium {
+    width: 64px;
+    height: 64px
+}
+
+.character-portrait__img--size-normal {
+    width: 80px;
+    height: 80px
+}
+
+.character-portrait__img--size-large {
+    width: 100px;
+    height: 100px
+}
+.character-portrait__image-frame {
+    top: -2%;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 2px solid #333;
+    background-color: #000
+}
+.character-portrait__image-frame--alignment-2 {
+    border-color: #3f8cba;
+    -webkit-box-shadow: 0 0 3px 2px rgba(63,140,186,.8) inset;
+    box-shadow: inset 0 0 3px 2px rgba(63,140,186,.8)
+}
+
+.character-portrait__image-frame--alignment-3 {
+    border-color: #b03233;
+    -webkit-box-shadow: 0 0 3px 2px rgba(176,50,51,.8) inset;
+    box-shadow: inset 0 0 3px 2px rgba(176,50,51,.8)
+}
+
+.character-portrait__image-frame--is-galactic-legend {
+    border-color: #d6b573
+}
+.character-portrait__image-frame--size-micro {
+    width: 30px;
+    height: 30px
+}
+
+.character-portrait__image-frame--size-xsmall {
+    width: 40px;
+    height: 40px
+}
+
+.character-portrait__image-frame--size-small {
+    width: 50px;
+    height: 50px
+}
+
+.character-portrait__image-frame--size-medium {
+    width: 64px;
+    height: 64px
+}
+
+.character-portrait__image-frame--size-normal {
+    width: 80px;
+    height: 80px
+}
+
+.character-portrait__image-frame--size-large {
+    width: 100px;
+    height: 100px
+}

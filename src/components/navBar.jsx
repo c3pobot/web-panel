@@ -11,7 +11,7 @@ import GetCookie from './cookies'
 import IconMenu from './iconMenu'
 
 //const paths = [{name: 'Home', path: '/home'}, {name: 'AllyCodes', path: '/allyCodes'}, {name: 'Squads', path: '/squads'}, {name: 'Squad Groups', path: '/squadGroups'}, {name: 'Help', path: '/help'}]
-const linkedPaths = [{name: 'Home', path: '/home'}, {name: 'AllyCodes', path: '/allyCodes'}, { name: 'Squads', path: '/squads'}, {name: 'Squad Groups', path: '/squadGroups'}, {name: 'TW', path: '/tw'}, {name: 'TB', path: '/tb'}, {name: 'Help', path: '/help'}]
+const linkedPaths = [{name: 'Home', path: '/home'}, {name: 'AllyCodes', path: '/allyCodes'}, {name: 'Mods', path: '/mods' }, { name: 'Squads', path: '/squads'}, {name: 'Squad Groups', path: '/squadGroups'}, {name: 'TW', path: '/tw'}, {name: 'TB', path: '/tb'}, {name: 'Help', path: '/help'}]
 const nonLinkedPaths = [{name: 'AllyCodes', path: '/allyCodes'}, {name: 'Help', path: '/help'}]
 export default function NavBar ({ systemTheme, setSystemTheme, webProfile, setWebProfile }) {
   //hooks

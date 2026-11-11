@@ -1,5 +1,5 @@
 FROM node:20-alpine
-LABEL org.opencontainers.image.source https://github.com/c3pobot/web-panel
+LABEL org.opencontainers.image.source=https://github.com/c3pobot/web-panel
 WORKDIR /app
 
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "dev", "--force"]

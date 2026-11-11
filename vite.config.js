@@ -8,12 +8,13 @@ const projectRootDir = resolve(__dirname);
 export default defineConfig({
   plugins: [react(), alias()],
   server: {
-    host: true,
+    host: "0.0.0.0",
     port: 3000
   },
   resolve: {
     alias: {
-      'components': resolve(projectRootDir, "src/components")
+      'components': resolve(projectRootDir, "src/components"),
+      'views': resolve(projectRootDir, "src/views")
     }
   }
 })

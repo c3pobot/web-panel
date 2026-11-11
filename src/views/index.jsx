@@ -5,6 +5,7 @@ import Home from './home'
 import Discord from './discord'
 import CodeAuth from './codeAuth'
 import Google from './google'
+import Mods from './mods'
 import Squads from './squads'
 import SquadGroups from './squadGroups'
 import TB from './tb'
@@ -26,6 +27,7 @@ export default function NavRoutes(props = {}) {
           <Route path = '/help/*' element={<Help {...opts}/>}/>
           <Route path = '/Squads/*' element={<Squads {...opts}/>}/>
           <Route path = '/SquadGroups/*' element={<SquadGroups {...opts}/>}/>
+          <Route path = '/mods/*' element={<Mods {...opts}/>}/>
           <Route path = '/tb/*' element={<TB {...opts}/>}/>
           <Route path = '/tw/*' element={<TW {...opts}/>}/>
           <Route path = '/*' element={<Home {...opts}/>}/>

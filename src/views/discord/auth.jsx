@@ -20,7 +20,7 @@ export default function Auth(opts = {}) {
     localStorage.removeItem('discordStateParam')
     if(urlParms?.code && urlParms?.state && stateParam === urlParms.state){
       const dObj = await ApiRequest({method: 'discordAuth', data: {code: urlParms?.code, theme: (systemTheme ? systemTheme:'light')}})
-      console.log(dObj)
+      localStorage.setItem('maxRelic', dObj.maxRelic || 11)
       if(dObj?.encryptedId){
         if(dObj.data?.webProfile) await setWebProfile(dObj.data.webProfile)
         await SetAuth(dObj)

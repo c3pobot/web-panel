@@ -1,11 +1,18 @@
 function descendingComparator(a, b, orderBy) {
-  if (b[orderBy] < a[orderBy]) {
-    return -1;
+  if(a[orderBy] && b[orderBy]){
+    if (b[orderBy] < a[orderBy]) {
+      return -1;
+    }
+    if (b[orderBy] > a[orderBy]) {
+      return 1;
+    }
+    return 0;
+  }else{
+    if(a[orderBy]) return -1
+    if(b[orderBy]) return 1
+    return 0
   }
-  if (b[orderBy] > a[orderBy]) {
-    return 1;
-  }
-  return 0;
+
 }
 function getComparator(order, orderBy) {
   return order === 'desc'
@@ -15,6 +22,7 @@ function getComparator(order, orderBy) {
 export default function StableSort(array, order, orderBy) {
   const comparator = getComparator(order, orderBy)
   return  array.sort((a, b) => {
+
       const order = comparator(a, b);
       if (order !== 0) {
         return order;
